@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(
     cors({
-        origin: ['https://gbu-academics.vercel.app/', 'https://gbu-academics.vercel.app/cse', 'https://gbu-academics.vercel.app/it', 'https://gbu-academics.vercel.app/ece'],
+        origin: "https://gbu-academics.vercel.app/",
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
