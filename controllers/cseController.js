@@ -60,6 +60,64 @@ export const checkCseDuplicate = async (req, res) => {
     }
 };
 
+export const updateTable = async (req, res) => {
+    try {
+        const { subCode, subYear, subSem, docLink } = req.body;
+        if (!subCode || !subYear || !subSem || !docLink) {
+            return res.status(400).json({ error: "Missing required parameters" });
+        }
+        const updateField = `year${subYear}.${subSem}`;
+        const updatedSubject = await CSE.findOneAndUpdate(
+            { subCode }, 
+            { $set: { [updateField]: docLink } }, 
+            { new: true }
+        );
+        if (!updatedSubject) {
+            return res.status(404).json({ message: "Subject not found" });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Document link updated successfully",
+            updatedSubject
+        });
+    } catch (err) {
+        console.error("Error updating Subject Table Details:", err);
+        res.status(500).json({
+            success: false,
+            message: "Error updating Subject Table Details"
+        });
+    }
+}
+
+export const deleteTable = async (req, res) => {
+    try {
+        const { subCode, subYear, subSem, docLink } = req.body;
+        if (!subCode || !subYear || !subSem || !docLink) {
+            return res.status(400).json({ error: "Missing required parameters" });
+        }
+        const updateField = `year${subYear}.${subSem}`;
+        const updatedSubject = await CSE.findOneAndUpdate(
+            { subCode }, 
+            { $set: { [updateField]: ' ' } }, 
+            { new: true }
+        );
+        if (!updatedSubject) {
+            return res.status(404).json({ message: "Subject not found" });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Document link updated successfully",
+            updatedSubject
+        });
+    } catch (err) {
+        console.error("Error updating Subject Table Details:", err);
+        res.status(500).json({
+            success: false,
+            message: "Error updating Subject Table Details"
+        });
+    }
+}
+
 export const addCseSubs = async (req, res) => {
     try {
         const { subCode, subName, year2025,  midSem2025, endSem2025, year2024, midSem2024, endSem2024, year2023, midSem2023, endSem2023, year2022, midSem2022, endSem2022 } = req.body;
