@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(
     cors({
-        origin: ["https://gbu-academics.vercel.app", "http://localhost:5174"],
+        origin: ["https://gbu-academics.vercel.app"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
@@ -28,11 +28,11 @@ app.use("/", soictRouter);
 app.use("/", adminRouter);
 
 app.get('/', (req, res) => {
-    const routes = {
-        cseServer: "CSE",
-        itServer: "IT",
-        eceServer: "ECE",
-    };
-    res.render('server', routes);
-    // res.send('server is running')
+    // const routes = {
+    //     cseServer: "CSE",
+    //     itServer: "IT",
+    //     eceServer: "ECE",
+    // };
+    // res.render('server', routes);
+    res.send('server is working!')
 })
