@@ -16,8 +16,8 @@ export const viewCseSubs = async (req, res) => {
 
 export const searchCseSubs = async (req, res) => {
     try {
-        const { sub } = req.query;
-        const query = sub.toUpperCase();
+        const { subCode } = req.query;
+        const query = subCode.toUpperCase();
         const response = await CSE.findOne({ subCode: query });
         if (response) {
             return res.status(200).json({
