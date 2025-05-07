@@ -16,15 +16,16 @@ export const viewCseSubs = async (req, res) => {
 
 export const searchCseSubs = async (req, res) => {
     try {
-        const { subCode } = req.query;
-        const response = await CSE.findOne({ subCode: subCode });
+        const { sub } = req.query;
+        const query = sub.toUpperCase();
+        const response = await CSE.findOne({ subCode: query });
         if (response) {
             return res.status(200).json({
                 status: true,
                 response
             });
         }
-        return res.status(200).json({
+        return res.status(404).json({
             status: false,
             message: 'Subject not found in the database.',
         });
